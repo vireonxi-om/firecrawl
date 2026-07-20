@@ -85,7 +85,7 @@ jobs:
             "https://github.com/apple/foundationdb/releases/download/${FDB_VERSION}/foundationdb-clients_${FDB_VERSION}-1_amd64.deb"
           sudo dpkg -i /tmp/fdb-clients.deb
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -480,7 +480,7 @@ jobs:
   #     - run: pnpm config set store-dir ~/.pnpm-store
   #     - run: mkdir -p ~/.pnpm-store
 
-  #     - uses: actions/setup-node@v6
+  #     - uses: actions/setup-node@v7
   #       with:
   #         node-version: 22
   #         cache: pnpm
@@ -588,7 +588,7 @@ jobs:
         with:
           version: 11.4.0
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
