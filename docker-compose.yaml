@@ -178,6 +178,27 @@ services:
         max-file: "3"
         compress: "true"
 
+  searxng:
+    container_name: searxng
+    image: searxng/searxng:latest
+    environment:
+      - BASE_URL=http://searxng:8080
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./searxng-config:/etc/searxng
+    networks:
+      - backend
+    restart: unless-stopped
+    cpus: 1.0
+    mem_limit: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
+
   # FoundationDB queue backend (experimental) — DISABLED 2026-07-20, not in use.
   # NUQ_BACKEND confirmed unset on this box; nuq-postgres is the live backend.
   # See vault/outputs/2026-07-20-firecrawl-upgrade-plan-for-openclaw.md
