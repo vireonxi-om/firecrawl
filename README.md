@@ -6,6 +6,19 @@
   >
 </h3>
 
+> **This is a personal self-hosted fork**, tracking [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) at commit `47f321f` with local hardening on top. Not affiliated with or endorsed by the Firecrawl team.
+>
+> **What's different from upstream:**
+> - FoundationDB (experimental queue backend) disabled — not in use, nuq-postgres is the live queue
+> - CPU/memory limits on redis, rabbitmq, nuq-postgres for blast-radius isolation
+> - `shm_size: 2g` on playwright-service to prevent Chromium context crashes under load
+> - [SearXNG](https://github.com/searxng/searxng) sidecar wired up for `/search`, JSON output enabled
+> - Local [Ollama](https://ollama.com) support for `/extract` — patched `llmExtract.ts` to remove the hardcoded OpenAI provider (see `apps/api/src/scraper/scrapeURL/transformers/llmExtract.ts`)
+> - `restart: unless-stopped` on every service, verified to survive a Docker daemon restart
+> - `scripts/safe-restart.sh` — works around an intermittent ioredis stale-DNS issue (`EAI_AGAIN`) that can occur when `api`'s dependencies (redis/rabbitmq/nuq-postgres) get recreated while `api` keeps running
+>
+> Config lives in `.env` (gitignored, see `.env` keys used in `docker-compose.yaml`) and `searxng-config/settings.yml`. This fork tracks a shallow clone of upstream, so it doesn't carry upstream's full commit history — see [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) for that.
+
 <div align="center">
   <a href="https://github.com/firecrawl/firecrawl/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/firecrawl/firecrawl" alt="License">
