@@ -57,7 +57,7 @@ jobs:
       - name: Run Claude remediation
         id: claude
         if: ${{ steps.scan.outputs.has_uncovered == 'true' }}
-        uses: anthropics/claude-code-action@2cc1ac1331eac7a6a96d716dd204dd2888d0fcd2 # v1
+        uses: anthropics/claude-code-action@af0559ee4f514d1ef21826982bed13f7edc3c35e # v1
         with:
           anthropic_api_key: ${{ secrets.NPM_AUDIT_CLAUDE_ANTHROPIC_API_KEY }}
           base_branch: ${{ github.event.repository.default_branch }}
